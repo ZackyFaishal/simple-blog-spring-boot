@@ -23,7 +23,15 @@ public class Post{
 		this.regDate = new Date();
 		this.updtDate = new Date();
 	}
-
+	
+    public Post(String user, String title, String content) {
+    	this.user = user;
+    	this.title = title;
+    	this.content = content;
+    	this.regDate = new Date();
+    	this.updtDate = new Date();
+    }
+	
 	public Long getId() {
 		return id;
 	}

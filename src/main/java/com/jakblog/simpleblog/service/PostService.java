@@ -29,8 +29,29 @@ public class PostService {
 		return postList;
     }
     
+    public List<Post> getPostsOrderByUpdtAsc(String query){
+    	List<Post> postsList = postRepository.findPostOrderByUpdtDateAsc();
+    	return posts;
+    }
+    
+    public List<Post> getPostsOrderByRegDesc(String query){
+    	List<Post> postsList = postRepository.findPostOrderByUpdtRegDesc();
+    	return posts;
+    }
+    
     public List<Post> searchPostByTitle(String query){
     	List<Post> posts = postRepository.findPostLikeTitle(query);
     	return posts;
     }
+    
+	public boolean savePost(Post post) {
+		int result = postRepository.savePost(post);
+		boolean isSuccess = true;
+		
+		if(result == 0) {
+			isSuccess = false;
+		}
+		
+		return isSuccess;
+	}
 }

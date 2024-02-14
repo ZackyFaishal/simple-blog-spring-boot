@@ -30,10 +30,28 @@ public class PostRepository {
 		return this.jdbcTemplate.query(sql, rowMapper);
 	}
 	
+	
+	public List<Post> findPostOrderByUpdtDateAsc(){
+		String sql = "SELECT * FROM post ORDER BY updt_date ASC";
+		RowMapper<Post> rowMapper = new PostMapper();
+		return this.jdbcTemplate.query(sql, rowMapper);
+	}
+	
+	public List<Post> findPostOrderByUpdtRegDesc(){
+		String sql = "SELECT * FROM post ORDER BY reg_date ASC";
+		RowMapper<Post> rowMapper = new PostMapper();
+		return this.jdbcTemplate.query(sql, rowMapper);
+	}
+	
 	public List<Post> findPostLikeTitle(String query){
 		String sql ="SELECT * FROM post WHERE title LIKE ?";
 		RowMapper<Post> rowMapper = new PostMapper();
 		return this.jdbcTemplate.query(sql, rowMapper, '%'+query+'%');
+	}
+	
+	public int savePost(Post post) {
+		String sql = "INSERT INTO post(user, title, content, reg_date, updt_date) VALUES(?,?,?,?,?)";
+		return jdbcTemplate.update(sql, post.getUser(), post.getTitle(), post.getContent(), post.getRegDate(), post.getUpdtDate());
 	}
 }
 
